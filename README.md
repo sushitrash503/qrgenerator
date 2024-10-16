@@ -1,9 +1,5 @@
 # QR Code Generator
 
-![QR Code Generator](https://github.com/user-attachments/assets/90051cb6-9930-47c0-8100-021ec195da36)
-
-## Descripción
-
 Este proyecto es una aplicación web simple que permite generar un código QR a partir de cualquier URL proporcionada por el usuario. Una vez generado, el código QR puede ser descargado como una imagen PNG con solo hacer clic en el botón de descarga.
 
 ### Funcionalidades:
