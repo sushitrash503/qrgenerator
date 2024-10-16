@@ -42,5 +42,4 @@ Este proyecto es una aplicación web simple que permite generar un código QR a 
 2. Asegúrate de tener acceso a internet para cargar la librería QRCode.js desde CDN.
 3. Abre el archivo `index.html` en tu navegador para comenzar a utilizar la aplicación.
 
-## Estructura de Archivos
 
