@@ -8,109 +8,22 @@
     <link rel="stylesheet" href="/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script defer src="/app.js"></script>
 </head>
 <body>
     <div class="container">
+        <label class="titulo" >Generador de Codigos Qr</label>
         <label for="link">Ingresa tu link:</label>
         <div class="input-container">
-            <input
-                class="input"
-                id="link"
-                placeholder="Pon tu url aquí"
-                type="text"
-            />
+            <input class="input" id="link" placeholder="Pon tu url aquí" type="text" />
         </div>
         <button id="generateButton" class="btn">Generar QR</button>
-        <button id="downloadButton" class="btn">Descargar QR</button>
         <div id="qrContainer" class="qr"></div>
+        <button id="downloadButton" class="btn" style="display:none;">Descargar QR</button> 
     </div>
-
-    <!-- Botón de historial en la esquina -->
-    <button id="historyButton" class="history-btn">Historial</button>
-
-    <!-- Contenedor del historial -->
-    <div id="historyContainer" class="history-container" style="display:none;">
-        <h2>Historial de Códigos QR</h2>
-        <ul id="historyList"></ul>
-    </div>
-
-    <script>
-        const contenedorqr = document.getElementById('qrContainer');
-        const QR = new QRCode(contenedorqr);
-        const generateButton = document.getElementById('generateButton');
-        const downloadButton = document.getElementById('downloadButton');
-        const linkInput = document.getElementById('link');
-        const historyButton = document.getElementById('historyButton');
-        const historyContainer = document.getElementById('historyContainer');
-        const historyList = document.getElementById('historyList');
-
-        // Recuperar historial desde localStorage o iniciar vacío
-        let qrHistory = JSON.parse(localStorage.getItem('qrHistory')) || [];
-
-        // Generar QR y agregarlo al historial
-        generateButton.addEventListener('click', () => {
-            const linkValue = linkInput.value.trim();
-            if (linkValue) {
-                QR.makeCode(linkValue);
-
-                // Verificar si el enlace ya existe en el historial
-                if (!qrHistory.includes(linkValue)) {
-                    qrHistory.push(linkValue); // Agregar la URL solo si no está en el historial
-                    updateHistory();
-                    saveHistory(); // Guardar el historial en localStorage
-                } else {
-                    alert("Este enlace ya está en el historial.");
-                }
-            } else {
-                alert("Por favor, ingresa un enlace válido.");
-            }
-        });
-
-        // Mostrar/ocultar historial
-        historyButton.addEventListener('click', () => {
-            historyContainer.style.display = historyContainer.style.display === 'none' ? 'block' : 'none';
-        });
-
-        // Actualizar el historial en la UI
-        function updateHistory() {
-            historyList.innerHTML = ''; // Limpiar la lista antes de agregar nuevos elementos
-            qrHistory.forEach((link, index) => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${index + 1}: ${link}`;
-                listItem.style.cursor = 'pointer'; // Hacemos que el historial sea clicable
-                
-                // Agregar evento click para insertar el valor en el input
-                listItem.addEventListener('click', () => {
-                    linkInput.value = link; // Reemplazar el valor del input con el del historial
-                });
-                
-                historyList.appendChild(listItem); // Agregar el item a la lista
-            });
-        }
-
-        // Guardar historial en localStorage
-        function saveHistory() {
-            localStorage.setItem('qrHistory', JSON.stringify(qrHistory));
-        }
-
-        // Descargar el QR generado
-        downloadButton.addEventListener('click', () => {
-            const qrCanvas = contenedorqr.querySelector('canvas');
-            if (qrCanvas) {
-                const link = document.createElement('a');
-                link.href = qrCanvas.toDataURL("image/png");
-                link.download = 'qrcode.png';
-                link.click();
-            } else {
-                alert('Por favor, genera primero un código QR.');
-            }
-        });
-
-        // Inicializar historial en la carga de la página
-        window.onload = () => {
-            updateHistory();
-        }
-    </script>
 </body>
 </html>
