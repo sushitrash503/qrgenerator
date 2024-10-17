@@ -5,25 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script defer src="/app.js"></script>
     <link rel="stylesheet" href="/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <script defer src="/app.js"></script>
 </head>
 <body>
     <div class="container">
-        <label class="titulo" >Generador de Codigos Qr</label>
         <label for="link">Ingresa tu link:</label>
         <div class="input-container">
-            <input class="input" id="link" placeholder="Pon tu url aquí" type="text" />
+            <input
+                class="input"
+                id="link"
+                placeholder="Pon tu url aquí"
+                type="text"
+            />
         </div>
         <button id="generateButton" class="btn">Generar QR</button>
         <div id="qrContainer" class="qr"></div>
-        <button id="downloadButton" class="btn" style="display:none;">Descargar QR</button> 
     </div>
+
+    <!-- Botón de historial en la esquina -->
+    <button id="historyButton" class="history-btn">Historial</button>
+
+    <!-- Contenedor del historial -->
+    <div id="historyContainer" class="history-container" style="display:none;">
+        <h2>Historial de Códigos QR</h2>
+        <ul id="historyList"></ul>
+    </div>
+
 </body>
 </html>
